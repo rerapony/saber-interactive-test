@@ -3,15 +3,17 @@
 #include <glm/glm.hpp>
 using namespace glm;
 
-void calc_mesh_normals(vec3* normals, const vec3* verts, const int* faces, int nverts, int nfaces)
+// задача делалать на Убунту, поэтому код не компилировался (кажестя, с glm лучше работать под Виндой),
+// но вроде бы он должен работать без проблем
+void calc_mesh_normals(vector* normals, const vec3* verts, const int* faces, int nverts, int nfaces)
 {
     // инициализируем нормали нулями
-    for (auto& normal: normals) {
-        normal = vec3(0.0, 0,0, 0.0);
+    for (int i = 0; i < nverts; ++i) {
+        normals[i] = vec3(0.0, 0,0, 0.0);
     }
 
     int a, b, c;
-    vec3 n = vec3(0.0, 0.0, 0.0);
+    vec3 n;
 
     //кажется, вершины идут друг за другом в массиве мешей?
     for (int i = 0; i < nfaces; ++i) {
@@ -27,7 +29,7 @@ void calc_mesh_normals(vec3* normals, const vec3* verts, const int* faces, int n
     }
 
     //мы можем не считать среднее значение в цикле выше, т.к. все равно нормализуем вектор в конце
-    for (auto& normal : normals) {
-        normal = normalize(normal);
+    for (int i = 0; i < nverts; ++i) {
+        normals[i] = normalize(normals[i]);
     }
 }
